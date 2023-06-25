@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'items' => "items#index", as: "items"
+    resources :items, only: [:new, :create, :show, :edit, :update]
+  end
+
   scope module: :public do
     root to: 'homes#top'
     get "about" => "homes#about", as: "about"
@@ -7,11 +12,13 @@ Rails.application.routes.draw do
       get "unsubscribe" => "customers#unsubscribe", as: "unsubscribe"
       patch "withdraw" => "customers#withdraw", as: "withdraw"
     end
+    resources :items, only: [:show]
+    get 'items' => "items#index", as: "items"
   end
-  devise_for :admins, controllers: {
-    sessions:      'admins/sessions',
-    passwords:     'admins/passwords',
-    registrations: 'admins/registrations'
+  devise_for :admin, controllers: {
+    sessions:      'admin/sessions',
+    passwords:     'admin/passwords',
+    registrations: 'admin/registrations'
   }
   devise_for :customers, controllers: {
     sessions:      'public/sessions',

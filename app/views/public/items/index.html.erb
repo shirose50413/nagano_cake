@@ -1,0 +1,11 @@
+<h3>商品一覧<span>（全<%= @items_count %>件）</span></h3>
+        <% @items.each do |item| %>
+          <div>
+            <%= link_to item_path(item.id) do %>
+              <%= image_tag item.image, size: "100x100" %><br>
+            <% end %>
+            <%= item.name %><br>
+            <%= item.price.to_s(:delimited) %>
+          </div>
+        <% end %>
+<%= paginate @items %>

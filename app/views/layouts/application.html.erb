@@ -16,7 +16,7 @@
       <ul>
         <% if admin_signed_in? %>
           <li>
-            <%= link_to "商品一覧" , about_path %>
+            <%= link_to "商品一覧" , admin_items_path %>
           </li>
           <li>
             <%= link_to "会員一覧" , about_path %>
@@ -35,7 +35,7 @@
             <%= link_to "マイページ" , customers_path %>
           </li>
           <li>
-            <%= link_to "商品一覧" , about_path %>
+            <%= link_to "商品一覧" , items_path %>
           </li>
           <li>
             <%= link_to "カート" , about_path %>
@@ -48,7 +48,7 @@
             <%= link_to "About" , about_path %>
           </li>
           <li>
-            <%= link_to "商品一覧" , about_path %>
+            <%= link_to "商品一覧" , items_path %>
           </li>
           <li>
             <%= link_to "新規登録" , new_customer_registration_path %>

@@ -9,10 +9,9 @@
 <h2>新着商品</h2>
 <div>
 <% @Items.each do |item| %>
+  <%= image_tag item.image, size: "100x100" %>
   <%= item.name %>
-  <%= item.price %>
+  <%= item.price.to_s(:delimited) %>
 <% end %>
-<p>ショートケーキ</p>
-<p>¥300</p>
 </div>
 <%= link_to "全ての商品を見る>" , about_path %>

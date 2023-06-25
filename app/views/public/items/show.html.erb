@@ -1,0 +1,6 @@
+<span>
+  <%= image_tag @item.image, size: "200x200" %>
+</span>
+<h3><%= @item.name %></h3>
+<p><%= @item.introduction %></p>
+<p>¥ <%= @item.add_tax_price.to_s(:delimited) %><span>（税込）</span></p>

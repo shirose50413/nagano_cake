@@ -1,0 +1,23 @@
+<h3>商品一覧</h3>
+<span>
+  <%= link_to "＋" , new_admin_item_path %>
+</span>
+      <table class="table">
+        <thead>
+          <td>商品ID</td>
+          <td>商品名</td>
+          <td>税抜価格</td>
+        </thead>
+        <% @items.each do |item| %>
+          <tr>
+            <td><%= item.id %></td>
+            <td>
+              <%= link_to admin_item_path(item.id) do %>
+                <%= item.name %>
+              <% end %>
+            </td>
+            <td><%= item.price.to_s(:delimited) %></td>
+          </tr>
+        <% end %>
+      </table>
+      <%= paginate @items %>
