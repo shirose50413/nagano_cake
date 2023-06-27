@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   namespace :admin do
+    get 'customers/index'
+    get 'customers/show'
+    get 'customers/edit'
+  end
+  namespace :admin do
     get 'items' => "items#index", as: "items"
     resources :items, only: [:new, :create, :show, :edit, :update]
+    resources :customers, only: [:index, :show, :edit, :update]
   end
 
   scope module: :public do
@@ -12,8 +18,7 @@ Rails.application.routes.draw do
       get "unsubscribe" => "customers#unsubscribe", as: "unsubscribe"
       patch "withdraw" => "customers#withdraw", as: "withdraw"
     end
-    resources :items, only: [:show]
-    get 'items' => "items#index", as: "items"
+    resources :items, only: [:index, :show]
   end
   devise_for :admin, controllers: {
     sessions:      'admin/sessions',

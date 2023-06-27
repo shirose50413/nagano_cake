@@ -7,6 +7,7 @@
           <td>商品ID</td>
           <td>商品名</td>
           <td>税抜価格</td>
+          <td>ステータス</td>
         </thead>
         <% @items.each do |item| %>
           <tr>
@@ -17,6 +18,7 @@
               <% end %>
             </td>
             <td><%= item.price.to_s(:delimited) %></td>
+            <td><%= item.is_sold_out ? '販売停止中' : '販売中' %></td>
           </tr>
         <% end %>
       </table>

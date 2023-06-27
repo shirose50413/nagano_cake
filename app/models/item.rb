@@ -1,7 +1,9 @@
 class Item < ApplicationRecord
-    has_one_attached :image
+  has_one_attached :image
 
-    def add_tax_price
-      (self.price * 1.10).round
-    end
+  enum status:{attack: 0,spells:1}
+
+  def add_tax_price
+    (self.price * 1.10).round
+  end
 end
