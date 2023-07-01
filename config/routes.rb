@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :public do
+    get 'cart_items/index'
+  end
   namespace :admin do
     get 'customers/index'
     get 'customers/show'
@@ -19,6 +22,8 @@ Rails.application.routes.draw do
       patch "withdraw" => "customers#withdraw", as: "withdraw"
     end
     resources :items, only: [:index, :show]
+    delete "cart_items/destroy_all" => "cart_items#destroy_all", as: "destroy_all"
+    resources :cart_items, only: [:index, :create, :update, :destroy]
   end
   devise_for :admin, controllers: {
     sessions:      'admin/sessions',

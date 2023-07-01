@@ -4,6 +4,9 @@ class Item < ApplicationRecord
   enum status:{attack: 0,spells:1}
 
   def add_tax_price
-    (self.price * 1.10).round
+    (price * 1.10).round
   end
+  
+  has_many :cart_items, dependent: :destroy
+  
 end

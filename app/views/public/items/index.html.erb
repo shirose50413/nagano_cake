@@ -5,7 +5,7 @@
               <%= image_tag item.image, size: "100x100" %><br>
             <% end %>
             <%= item.name %><br>
-            <%= item.price.to_s(:delimited) %>
+            <%= item.add_tax_price.to_s(:delimited) %>
           </div>
         <% end %>
 <%= paginate @items %>
