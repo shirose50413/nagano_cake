@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   namespace :public do
+    get 'orders/new'
+    get 'orders/index'
+    get 'orders/show'
+  end
+  namespace :public do
     get 'cart_items/index'
   end
   namespace :admin do
@@ -24,6 +29,12 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show]
     delete "cart_items/destroy_all" => "cart_items#destroy_all", as: "destroy_all"
     resources :cart_items, only: [:index, :create, :update, :destroy]
+    resources :orders, only: [:new, :create, :index, :show] do
+      collection do
+        post "check"
+        get "complete"
+      end
+    end
   end
   devise_for :admin, controllers: {
     sessions:      'admin/sessions',
