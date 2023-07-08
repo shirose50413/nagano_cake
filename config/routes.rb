@@ -31,8 +31,8 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:index, :create, :update, :destroy]
     resources :orders, only: [:new, :create, :index, :show] do
       collection do
-        post "check"
-        get "complete"
+        post "check" => "orders#check", as: "check"
+        get "complete" => "orders#complete", as: "complete"
       end
     end
   end
