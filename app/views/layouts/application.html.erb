@@ -5,62 +5,97 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <header>
-      <h1>ながのCAKE</h1>
-      <ul>
-        <% if admin_signed_in? %>
-          <li>
-            <%= link_to "商品一覧" , admin_items_path %>
-          </li>
-          <li>
-            <%= link_to "会員一覧" , admin_customers_path %>
-          </li>
-          <li>
-            <%= link_to "注文履歴一覧" , about_path %>
-          </li>
-          <li>
-            <%= link_to "ジャンル一覧" , about_path %>
-          </li>
-          <li>
-            <%= link_to "ログアウト" , destroy_admin_session_path , method: :delete %>
-          </li>
-        <% elsif customer_signed_in? %>
-          <li>
-            <%= link_to "マイページ" , customers_path %>
-          </li>
-          <li>
-            <%= link_to "商品一覧" , items_path %>
-          </li>
-          <li>
-            <%= link_to "カート" , cart_items_path %>
-          </li>
-          <li>
-            <%= link_to "ログアウト" , destroy_customer_session_path , method: :delete %>
-          </li>
-        <% else %>
-          <li>
-            <%= link_to "About" , about_path %>
-          </li>
-          <li>
-            <%= link_to "商品一覧" , items_path %>
-          </li>
-          <li>
-            <%= link_to "新規登録" , new_customer_registration_path %>
-          </li>
-          <li>
-            <%= link_to "ログイン" , new_customer_session_path %>
-          </li>
-        <% end %>
+    <header class="border">
+      <nav class="navbar navbar-expand-ld">
+        <div class="container">
+          <%= link_to root_path, class: "navbar-brand" do %>
+            ながのCAKE
+          <% end %>
+          <div class="float-right">
+            <ul class="navbar-nav ml-auto list-group-horizontal">
+              <% if admin_signed_in? %>
+                <li>
+                  <%= link_to admin_items_path, class: 'btn btn-outline-secondary mx-2' do %>
+                    商品一覧
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to admin_customers_path, class: 'btn btn-outline-secondary mx-2' do %>
+                    会員一覧
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to admin_root_path, class: 'btn btn-outline-secondary mx-2' do %>
+                    注文履歴一覧
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to about_path, class: 'btn btn-outline-secondary mx-2' do %>
+                    ジャンル一覧
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to destroy_admin_session_path, class: 'btn btn-outline-secondary mx-2 ' , method: :delete do %>
+                    ログアウト
+                  <% end %>
+                </li>
+              <% elsif customer_signed_in? %>
+                <li>
+                  <%= link_to customers_path, class: 'btn btn-outline-secondary mx-3' do %>
+                    マイページ
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to items_path, class: 'btn btn-outline-secondary mx-3 ' do %>
+                    商品一覧
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to cart_items_path, class: 'btn btn-outline-secondary mx-3' do %>
+                    カート
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to destroy_customer_session_path, class: 'btn btn-outline-secondary mx-3' , method: :delete do %>
+                    ログアウト
+                  <% end %>
+                </li>
+              <% else %>
+                <li>
+                  <%= link_to about_path, class: 'btn btn-outline-secondary mx-3' do %>
+                    About
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to items_path, class: 'btn btn-outline-secondary mx-3' do %>
+                    商品一覧
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to new_customer_registration_path, class: 'btn btn-outline-secondary mx-3' do %>
+                    新規登録
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to new_customer_session_path, class: 'btn btn-outline-secondary mx-3' do %>
+                    ログイン
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
 
-      </ul>
     </header>
     <%= yield %>
-    <footer></footer>
+    <footer class="border"></footer>
   </body>
 </html>

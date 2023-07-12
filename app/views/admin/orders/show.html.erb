@@ -1,0 +1,85 @@
+<h3>注文履歴詳細</h3>
+<table>
+  <tr>
+    <th>購入者</th>
+    <td>
+      <%= link_to customers_path do %>
+        <%= @order.customer.last_name %> <%= @order.customer.first_name %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>注文日</th>
+    <td><%= @order.created_at.to_s(:date_jp) %></td>
+  </tr>
+  <tr>
+    <th>配送先</th>
+    <td>
+      〒<%= @order.postal_code %> <%= @order.address %><br>
+      <%= @order.name %>
+    </td>
+  </tr>
+  <tr>
+    <th>支払方法</th>
+    <td><%= @order.payment_method %></td>
+  </tr>
+  <tr>
+    <th>注文ステータス</th>
+    <td>
+      <%= form_with model: @order , url:admin_order_path(@order.id), method: :patch do |f| %>
+        <%= f.hidden_field :customer_id, :value => @order.customer_id %>
+        <%= f.hidden_field :postage, :value => @order.postage %>
+        <%= f.hidden_field :payment, :value => @order.payment %>
+        <%= f.hidden_field :payment_method, :value => @order.payment_method %>
+        <%= f.hidden_field :postal_code, :value => @order.postal_code %>
+        <%= f.hidden_field :address, :value => @order.address %>
+        <%= f.hidden_field :name, :value => @order.name %>
+        <%= f.select :state, [["入金待ち", "入金待ち"], ["入金確認", "入金確認"], ["製作中", "製作中"], ["発送準備中", "発送準備中"], ["発送済み", "発送済み"]] , selected: @order.state %>
+        <%= f.submit "更新" %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+<table>
+  <thead>
+    <td>商品名</td>
+    <td>単価（税込）</td>
+    <td>数量</td>
+    <td>小計</td>
+    <td>製作ステータス</td>
+  </thead>
+  <tbody>
+    <% @order_items.each do |order_item| %>
+      <tr>
+        <td><%= order_item.item.name %></td>
+        <td><%= order_item.item.add_tax_price.to_s(:delimited) %></td>
+        <td><%= order_item.amount %></td>
+        <td><%= order_item.subtotal.to_s(:delimited) %></td>
+        <td>
+          <%= form_with model: @order_items , url:admin_order_item_path(order_item.id), method: :patch do |f| %>
+            <%= f.hidden_field :order_id, :value => order_item.order_id %>
+            <%= f.hidden_field :item_id, :value => order_item.item_id %>
+            <%= f.hidden_field :purchase_price, :value => order_item.purchase_price %>
+            <%= f.hidden_field :amount, :value => order_item.amount %>
+            <%= f.select :progress, [["着手不可", "着手不可"], ["製作待ち", "製作待ち"], ["製作中", "製作中"], ["製作完了", "製作完了"]] , selected: order_item.progress %>
+            <%= f.submit "更新" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<table>
+  <tr>
+    <th>商品合計</th>
+    <td><%= @total.to_s(:delimited) %></td>
+  </tr>
+  <tr>
+    <th>送料</th>
+    <td><%= @order.postage %></td>
+  </tr>
+  <tr>
+    <th>請求金額合計</th>
+    <td><%= @order.payment %></td>
+  </tr>
+</table>
