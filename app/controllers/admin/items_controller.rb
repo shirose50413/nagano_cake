@@ -1,6 +1,6 @@
 class Admin::ItemsController < ApplicationController
   before_action :authenticate_admin!
-  
+
   def index
     @items = Item.page(params[:page])
   end
@@ -17,7 +17,7 @@ class Admin::ItemsController < ApplicationController
     @item = Item.new(item_params)
     @item.genre_id = 0
     if @item.save
-      redirect_to admin_items_path
+      redirect_to admin_item_path(@item.id)
     else
       render :new
     end
@@ -39,7 +39,7 @@ class Admin::ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :image, :introduction, :price)
+    params.require(:item).permit(:name, :image, :introduction, :price, :is_sold_out)
   end
 
 end

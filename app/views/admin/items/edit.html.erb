@@ -25,7 +25,16 @@
         <%= f.text_field :price, class:"form-control", placeholder:"1000" %>円
       </td>
     </tr>
+    <tr>
+      <td>販売ステータス</td>
+      <td>
+        <%= f.radio_button :is_sold_out, false %>
+        <%= f.label :"販売中" %>
 
+        <%= f.radio_button :is_sold_out, true %>
+        <%= f.label :"販売停止中" %>
+      </td>
+    </tr>
   </table>
   <%= f.submit '変更を保存', class:"btn btn-lg btn-block btn-info mt-4" %>
 <% end %>

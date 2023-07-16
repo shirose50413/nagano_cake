@@ -9,7 +9,7 @@ class Public::CartItemsController < ApplicationController
 
   def create
     increase_or_create(params[:cart_item][:item_id])
-    redirect_to items_path, notice: 'Successfully added product to your cart'
+    redirect_to cart_items_path, notice: 'Successfully added product to your cart'
   end
 
   def update
@@ -25,7 +25,7 @@ class Public::CartItemsController < ApplicationController
   def destroy_all
     @cart_items = current_customer.cart_items
     @cart_items.destroy_all
-    redirect_to items_path
+    redirect_to cart_items_path
   end
 
   private

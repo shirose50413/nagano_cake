@@ -1,20 +1,31 @@
 <div class="container">
-    <div class="row">
-        <div class="mx-auto col-8 col-lg-6 col-xl-4">
-<div class="bg-image" style="background-image: url('/images/142_refileDownloadImage.jpg')">
-  <div class="col-8 opacity-50">
-    <p>ようこそ、ながのCAKEへ！</p>
-    <p>このサイトは、ケーキ販売のECサイトになります。</p>
-    <p>会員でない方も商品の閲覧はできますが、</p>
-    <p>購入には会員登録が必要になります。</p>
+  <div class="row">
+    <div class="mx-auto col-8">
+      <div class="bg-image" style="background-image: url('/images/142_refileDownloadImage.jpg')">
+        <div class="opacity-50">
+          <p>ようこそ、ながのCAKEへ！</p>
+          <p>このサイトは、ケーキ販売のECサイトになります。</p>
+          <p>会員でない方も商品の閲覧はできますが、</p>
+          <p>購入には会員登録が必要になります。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <h3>新着商品</h3>
+    <% @Items.each do |item| %>
+      <div class="col-2">
+        <%= link_to item_path(item.id) do %>
+          <%= image_tag item.image, size: "100x100" %>
+        <% end %><br>
+        <%= item.name %><br>
+        <%= item.add_tax_price.to_s(:delimited) %>
+      </div>
+    <% end %>
+  </div>
+  <div class="ps-5">
+    <%= link_to items_path do %>
+      全ての商品を見る>
+    <% end %>
   </div>
 </div>
-<h2>新着商品</h2>
-<div>
-<% @Items.each do |item| %>
-  <%= image_tag item.image, size: "100x100" %>
-  <%= item.name %>
-  <%= item.add_tax_price.to_s(:delimited) %>
-<% end %>
-</div>
-<%= link_to "全ての商品を見る>" , items_path %>
