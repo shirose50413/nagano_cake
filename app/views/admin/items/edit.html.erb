@@ -1,40 +1,54 @@
-<h3>商品編集</h3>
-<%= form_with model: @item,url:admin_item_path, method: :patch do |f| %>
-  <table>
-    <tr>
-      <td>商品画像</td>
-      <td>
-        <%= f.file_field :image, accept: "image/*", class: "w-100" %>
-      </td>
-    </tr>
-    <tr>
-      <td>商品名</td>
-      <td>
-        <%= f.text_field :name, class:"form-control", placeholder:"商品名" %>
-      </td>
-    </tr>
-    <tr>
-      <td>商品説明</td>
-      <td>
-        <%= f.text_area :introduction, class:"form-control", rows:"4", placeholder:"ここに説明文を記述します" %>
-      </td>
-    </tr>
-    <tr>
-      <td>税抜価格</td>
-      <td>
-        <%= f.text_field :price, class:"form-control", placeholder:"1000" %>円
-      </td>
-    </tr>
-    <tr>
-      <td>販売ステータス</td>
-      <td>
-        <%= f.radio_button :is_sold_out, false %>
-        <%= f.label :"販売中" %>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto col-10 pt-4">
+      <span class="h4 bg-light"><strong>商品編集</strong></span>
+    </div>
+    <div class="mx-auto col-8 pb-2">
+      <%= form_with model: @item,url:admin_item_path, method: :patch do |f| %>
+        <table>
+          <tr height="40">
+            <td width="150">商品画像</td>
+            <td>
+              <%= f.file_field :image, accept: "image/*", class: "w-100" %>
+            </td>
+            <td></td>
+          </tr>
+          <tr height="40">
+            <td width="150">商品名</td>
+            <td>
+              <%= f.text_field :name, class:"form-control", placeholder:"商品名" %>
+            </td>
+          </tr>
+          <tr>
+            <td width="150">商品説明</td>
+            <td>
+              <%= f.text_area :introduction, class:"form-control", rows:"4", placeholder:"ここに説明文を記述します" %>
+            </td>
+            <td></td>
+          </tr>
+          <tr height="40">
+            <td width="150">税抜価格</td>
+            <td>
+              <%= f.text_field :price, class:"form-control", placeholder:"1000" %>
+            </td>
+            <td>円</td>
+          </tr>
+          <tr height="40">
+            <td width="150">販売ステータス</td>
+            <td>
+              <%= f.radio_button :is_sold_out, false %>
+              <%= f.label :"販売中" %>
 
-        <%= f.radio_button :is_sold_out, true %>
-        <%= f.label :"販売停止中" %>
-      </td>
-    </tr>
-  </table>
-  <%= f.submit '変更を保存', class:"btn btn-lg btn-block btn-info mt-4" %>
-<% end %>
+              <%= f.radio_button :is_sold_out, true %>
+              <%= f.label :"販売停止中" %>
+            </td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
+      <div class="ms-5 col-8 text-center">
+        <%= f.submit '変更を保存', class:"btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>

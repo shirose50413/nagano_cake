@@ -18,6 +18,9 @@
           <%= link_to root_path, class: "navbar-brand" do %>
             ながのCAKE
           <% end %>
+          <% if customer_signed_in? %>
+            <span>ようこそ、<%= current_customer.last_name %>さん！</span>
+          <% end %>
           <div class="float-right">
             <ul class="navbar-nav ml-auto list-group-horizontal">
               <% if admin_signed_in? %>
@@ -36,11 +39,11 @@
                     注文履歴一覧
                   <% end %>
                 </li>
-                <li>
-                  <%= link_to about_path, class: 'btn btn-outline-secondary mx-2' do %>
-                    ジャンル一覧
-                  <% end %>
-                </li>
+                <!--<li>-->
+                  <!--%= link_to about_path, class: 'btn btn-outline-secondary mx-2' do %-->
+                    <!--ジャンル一覧-->
+                  <!--% end %-->
+                <!--</li>-->
                 <li>
                   <%= link_to destroy_admin_session_path, class: 'btn btn-outline-secondary mx-2 ' , method: :delete do %>
                     ログアウト
@@ -96,6 +99,6 @@
 
     </header>
     <%= yield %>
-    <footer class="border"></footer>
+    <footer class="border mt-2"></footer>
   </body>
 </html>

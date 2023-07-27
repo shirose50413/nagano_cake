@@ -1,25 +1,54 @@
-<h3>注文情報入力</h3>
-<%= form_with model: @order,url:check_orders_path, method: :post do |f| %>
-  <h4>支払方法</h4>
-    <%= f.radio_button :payment_method, "銀行振込" %>
-    <%= f.label :"銀行振込" %><br>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto col-10 pt-4 mb-4">
+      <span class="h4 bg-light"><strong>注文情報入力</strong></span>
+    </div>
+    <div class="mx-auto col-11">
+      <%= form_with model: @order,url:check_orders_path, method: :post do |f| %>
+        <span class="h5"><strong>支払方法</strong></span>
+        <div class="ms-4 mb-4">
+          <%= f.radio_button :payment_method, "銀行振込" %>
+          <%= f.label :"銀行振込" %><br>
 
-    <%= f.radio_button :payment_method, "クレジットカード" %>
-    <%= f.label :"クレジットカード" %>
+          <%= f.radio_button :payment_method, "クレジットカード" %>
+          <%= f.label :"クレジットカード" %>
+        </div>
 
-  <h4>お届け先</h4>
-    <%= f.radio_button :address_number, 1 %>
-    <%= f.label :address_number_1, "ご自身の住所" %><br>
-    〒<%= @customer.postal_code %> <%= @customer.address %><br>
-    <%= @customer.last_name %><%= @customer.first_name %><br>
+        <span class="h5"><strong>お届け先</strong></span>
+        <div class="ms-4">
+          <%= f.radio_button :address_number, 1 %>
+          <%= f.label :address_number_1, "ご自身の住所" %>
+          <div class="ms-4">
+            〒<%= @customer.postal_code %> <%= @customer.address %><br>
+            <%= @customer.last_name %><%= @customer.first_name %>
+          </div>
 
-    <%= f.radio_button :address_number, 2 %>
-    <%= f.label :address_number_2, "新しいお届け先" %><br>
-    <%= f.label :postal_code, "郵便番号" %>
-    〒<%= f.text_field :postal_code %><br>
-    <%= f.label :address, "住所" %>
-    <%= f.text_field :address %><br>
-    <%= f.label :name, "宛名" %>
-    <%= f.text_field :name %><br>
-    <%= f.submit "確認画面へ進む" %>
-<% end %>
+          <%= f.radio_button :address_number, 2 %>
+          <%= f.label :address_number_2, "新しいお届け先" %>
+          <div class="ms-4">
+            <table>
+              <tr>
+                <td>郵便番号（ハイフンなし）</td>
+                <td>〒</td>
+                <td><%= f.text_field :postal_code , placeholder:"0000000"%></td>
+              </tr>
+              <tr>
+                <td>住所</td>
+                <td></td>
+                <td><%= f.text_field :address , size: "50" , placeholder:"東京都渋谷区代々木神園町0-0"%></td>
+              </tr>
+              <tr>
+                <td>宛名</td>
+                <td></td>
+                <td><%= f.text_field :name , placeholder:"令和温子"%></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="mx-auto col-12 text-center">
+          <%= f.submit "確認画面へ進む" , class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

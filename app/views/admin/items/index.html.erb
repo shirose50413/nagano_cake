@@ -1,25 +1,45 @@
-<h3>商品一覧</h3>
-<span>
-  <%= link_to "＋" , new_admin_item_path %>
-</span>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto col-10 pt-4">
+      <span class="h4 bg-light"><strong>商品一覧</strong></span>
+      <span class="ps-5">
+        <%= link_to new_admin_item_path , class: 'btn btn-outline-secondary rounded-circle' do%>
+          <strong>＋</strong>
+        <% end %>
+      </span>
+    </div>
+    <div class="mx-auto col-11 mt-4">
       <table class="table">
-        <thead>
-          <td>商品ID</td>
-          <td>商品名</td>
-          <td>税抜価格</td>
-          <td>ステータス</td>
+        <thead class="table-light">
+          <td><strong>商品ID</strong></td>
+          <td><strong>商品名</strong></td>
+          <td><strong>税抜価格</strong></td>
+          <td><strong>ステータス</strong></td>
         </thead>
         <% @items.each do |item| %>
           <tr>
             <td><%= item.id %></td>
             <td>
-              <%= link_to admin_item_path(item.id) do %>
+              <%= link_to admin_item_path(item.id) ,class:'text-body' do %>
                 <%= item.name %>
               <% end %>
             </td>
             <td><%= item.price.to_s(:delimited) %></td>
-            <td><%= item.is_sold_out ? '販売停止中' : '販売中' %></td>
+            <% if item.is_sold_out == false %>
+              <td class="text-success">
+            <% else %>
+              <td class="text-secondary">
+            <% end %>
+              <strong><%= item.is_sold_out ? '販売停止中' : '販売中' %></strong>
+            </td>
           </tr>
         <% end %>
       </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3 mx-auto">
       <%= paginate @items %>
+    </div>
+  </div>
+</div>

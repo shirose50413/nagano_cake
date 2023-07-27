@@ -1,31 +1,39 @@
-<h3>注文履歴一覧</h3>
-<table>
-  <thead>
-    <td>注文日</td>
-    <td>配送先</td>
-    <td>注文商品</td>
-    <td>支払金額</td>
-    <td>ステータス</td>
-    <td>注文詳細</td>
-  </thead>
-  <tbody>
-    <% @orders.each do |order| %>
-      <tr>
-        <td><%= order.created_at.to_s(:date_jp) %></td>
-        <td>
-          〒<%= order.postal_code %><br>
-          <%= order.address %><br>
-          <%= order.name %>
-          </td>
-        <td>
-          <% order.order_items.each do |order_item| %>
-            <%= order_item.item.name%><br>
+<div class="container">
+  <div class="row">
+    <div class="mx-auto col-10 pt-4">
+      <span class="h4 bg-light"><strong>注文履歴一覧</strong></span>
+    </div>
+    <div class="mx-auto col-12 pb-5">
+      <table class="table">
+        <thead class="table-light">
+          <td><strong>注文日</strong></td>
+          <td><strong>配送先</strong></td>
+          <td><strong>注文商品</strong></td>
+          <td><strong>支払金額</strong></td>
+          <td><strong>ステータス</strong></td>
+          <td><strong>注文詳細</strong></td>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr class="align-middle">
+              <td><%= order.created_at.to_s(:date_jp) %></td>
+              <td>
+                〒<%= order.postal_code %><br>
+                <%= order.address %><br>
+                <%= order.name %>
+                </td>
+              <td>
+                <% order.order_items.each do |order_item| %>
+                  <%= order_item.item.name%><br>
+                <% end %>
+              </td>
+              <td><%= order.payment.to_s(:delimited) %>円</td>
+              <td><%= order.state %></td>
+              <td><%= link_to "表示する" , order_path(order.id) , class: "btn btn-primary" %></td>
+            </tr>
           <% end %>
-        </td>
-        <td><%= order.payment.to_s(:delimited) %>円</td>
-        <td><%= order.state %></td>
-        <td><%= link_to "表示する" , order_path(order.id) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
